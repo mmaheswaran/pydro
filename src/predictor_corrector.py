@@ -4,3 +4,7 @@ class PredictorCorrector:
     self.step = initstep
     self.starttime = st
     self.endtime = et
+    
+  def solve(self, hydroprops):
+      #hydroprops is a dictionary object
+              

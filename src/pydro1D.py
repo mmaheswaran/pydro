@@ -31,19 +31,19 @@ reg_lengths = [50.0, 50.0]
 reg_origins = [0.0,50.0]
 reg_meshsize = [50, 50]
 node_spacing = np.divide(np.array(reg_lengths),np.array(reg_meshsize))
-reg_numbers = []
 
+reg_numbers = []
 no_regions = len(reg_lengths)
 no_elements = 0
-
 for reg in range(no_regions):
   regsize = reg_meshsize[reg]
   no_elements = no_elements + regsize
   for e in range(regsize):
     reg_numbers.append(reg)
 
-print(len(reg_numbers))
 no_nodes = no_elements+1
+print(no_elements)
+print(no_nodes)
 
 #init scalar quantities
 eldensity = np.zeros(no_elements)
