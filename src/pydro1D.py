@@ -63,7 +63,7 @@ elvolume = Volume(no_elements)
 
 #init vector quantites
 nodepos,el2nodemap = init_nodepos(reg_origins,node_spacing,reg_numbers)
-assert len(nodepos) == no_nodes, "number node positions not equal {no_nodes}, got: {len(ndpositions)}"
+assert len(nodepos) == no_nodes, "number node positions not equal to {no_nodes}, got: {len(nodepos)}"
 ndpositions = Position(nodepos)
 ndvelocity = Velocity(no_nodes)
 

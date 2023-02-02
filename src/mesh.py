@@ -22,4 +22,6 @@ class FEM1D(Mesh):
         node2 = self.el2nodemap[element][1]
         dl = abs(ndpositions[2]-ndpositions[1])
         
+        return dl
+        
     
