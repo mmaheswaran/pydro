@@ -1,5 +1,7 @@
 import numpy as np
 from predictor_corrector import PredictorCorrector
+from vector_property import *
+from scalar_property import *
 
 #Assume equal spacing
 def init_nodepos(reg_origins,node_spacing,reg_numbers):
@@ -16,8 +18,7 @@ def init_nodepos(reg_origins,node_spacing,reg_numbers):
     nodpos.append(pos2)
     pos1 = pos2
 
-  nodepositions = np.array(nodpos)
-  return nodepositions
+  return nodpos
 
 #1D try
 
@@ -46,20 +47,29 @@ print(no_elements)
 print(no_nodes)
 
 #init scalar quantities
-eldensity = np.zeros(no_elements)
-elenergy = np.zeros(no_elements)
-elpressure = np.zeros(no_elements)
-elccs2 = np.zeros(no_elements)
-elmass = np.zeros(no_elements)
-elvolume = np.zeros(no_elements)
+elenergy = Energy(no_elements)
+eldensity = Density(no_elements)
+elpressure = Pressure(no_elements)
+elccs2 = SoundSpeed2(no_elements)
+elmass = Mass(no_elements)
+elvolume = Volume(no_elements)
 
 #init vector quantites
-ndvelocity = np.zeros(no_nodes)
+nodepos = init_nodepos(reg_origins,node_spacing,reg_numbers)
+assert len(nodepos) == no_nodes, "number node positions not equal {no_nodes}, got: {len(ndpositions)}"
+ndpositions = Position(nodepos)
+ndvelocity = Velocity(no_nodes)
 
-ndpositions = init_nodepos(reg_origins,node_spacing,reg_numbers)
-assert len(ndpositions) == no_nodes, "number node positions not equal {no_nodes}, got: {len(ndpositions)}"
+#Main solver
+solver = PredictorCorrector(initdt,step,tim,endtime)
+hydroproperties = {elenergy.__str__():elenergy, \
+                   eldensity.__str__():eldensity, \
+                   elpressure.__str__():elpressure, \
+                   elccs2.__str__():elccs2, \
+                   elmass.__str__():elmass, \
+                   elvolume.__str__():elvolume, \
+                   ndpositions.__str__():ndpositions, \
+                   ndvelocity.__str__():ndvelocity}
 
-
-pc = PredictorCorrector(initdt,step,tim,endtime)
-
+solver.solve(hydroproperties)
 

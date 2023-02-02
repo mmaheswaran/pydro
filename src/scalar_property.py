@@ -5,18 +5,37 @@ class ScalarProperty(ABC):
     def __init__(self,size):
         self.data = np.zeros(size)
         
-    def __str__(self):
-        return np.array_str(self.data)
-    
     @abstractmethod
-    def get_name(self):
+    def __str__(self):
         pass
     
     
 class Energy(ScalarProperty):
     
-    def get_name(self):
-        return "Energy"
+    def __str__(self):
+        return 'Energy'
     
+class Density(ScalarProperty):
     
+    def __str__(self):
+        return 'Density'
     
+class Pressure(ScalarProperty):
+    
+    def __str__(self):
+        return 'Pressure'
+    
+class Mass(ScalarProperty):
+    
+    def __str__(self):
+        return 'Mass'
+    
+class SoundSpeed2(ScalarProperty):
+    
+    def __str__(self):
+        return 'SoundSpeedSquared'
+    
+class Volume(ScalarProperty):
+    
+    def __str__(self):
+        return 'Volume'
