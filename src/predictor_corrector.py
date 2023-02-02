@@ -19,8 +19,6 @@ class PredictorCorrector:
         ndvelocity = hydroprops['Velocity']
         
         self.halfstep(hydroprops)
-        
-      
       
       
     def halfstep(self,hydroprops):
@@ -28,6 +26,8 @@ class PredictorCorrector:
         ndpositions = hydroprops['Position']
         ndvelocity = hydroprops['Velocity']
         ndpositions.update(ndvelocity,self.dt)
+        
+        
         
         
               
