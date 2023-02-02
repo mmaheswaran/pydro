@@ -40,8 +40,8 @@ class Volume(ScalarProperty):
     def __str__(self):
         return 'Volume'
     
-    def update(self, ndpositions, el2nodemap, mesh):
+    def update(self, ndpositions, mesh):
         noelements = len(self.data)
         for e in range(noelements):
-            self.data[e] = mesh.get_volume(e,el2nodemap,ndpositions)
+            self.data[e] = mesh.get_volume(e,ndpositions)
             
