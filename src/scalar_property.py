@@ -5,6 +5,12 @@ class ScalarProperty(ABC):
     def __init__(self,size):
         self.data = np.zeros(size)
         
+    def get_data(self):
+        return self.data
+    
+    def datalen(self):
+        return len(self.data)
+        
     @abstractmethod
     def __str__(self):
         pass

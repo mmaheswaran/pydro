@@ -73,7 +73,8 @@ mesh.get_connectivity(el2nodemap)
 
 #Main solver
 solver = PredictorCorrector(initdt,step,tim,endtime)
-hydroproperties = {elenergy.__str__():elenergy, \
+hydroproperties = {mesh.__str__():mesh, \
+                   elenergy.__str__():elenergy, \
                    eldensity.__str__():eldensity, \
                    elpressure.__str__():elpressure, \
                    elccs2.__str__():elccs2, \

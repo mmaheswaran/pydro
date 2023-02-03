@@ -27,6 +27,12 @@ class PredictorCorrector:
         ndvelocity = hydroprops['Velocity']
         ndpositions.update(ndvelocity,self.dt)
         
+        #update cell volumes
+        elvolume = hydroprops['Volume']
+        mesh = hydroprops['Mesh']
+        elvolume.update(ndpositions,mesh)
+        
+        #Update densitites
         
         
         
