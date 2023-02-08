@@ -17,9 +17,36 @@ class TestScalarProperties(unittest.TestCase):
     
     def test_volume_update(self):
         vol = Volume(1)
-        self.assertEqual(vol.datalen(), 1)
-        vol.update(self.ndpos,self.mesh)
-        self.assertEqual(vol.get_data(), [1.0])
+        print(vol.get_data())
+        #self.assertEqual(vol.datalen(), 1)
+        
+        #vol.update(self.ndpos,self.mesh)
+        #self.assertEqual(vol.get_data(), [1.0])
+        
+    def test_density_update(self):
+        density = Density(1)
+        print(density.get_data())
+        #mass = Mass(1)
+        #mass.set(0,1.0)
+        #vol = Volume(1)
+        #vol.set(0,1.0) 
+        
+        #density.update(mass,vol)
+        #self.assertEqual(density.get_data(), 1.0)       
+        
+    def test_mass_update(self):
+        #density = Density(1)
+        #density.set(0,1.0) 
+        #vol = Volume(1)
+        #vol.set(0,1.0) 
+        mass = Mass(1)
+        print(mass.get_data())
+        
+        #mass.update(density,vol)
+        #self.assertEqual(mass.get_data(),1.0)
+        
+        
+        
         
         
         

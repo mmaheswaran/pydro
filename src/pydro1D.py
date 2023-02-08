@@ -54,12 +54,15 @@ for reg in range(no_regions):
 no_nodes = no_elements+1
 
 #init scalar quantities
-elenergy = Energy(no_elements)
-eldensity = Density(no_elements)
 elpressure = Pressure(no_elements)
 elccs2 = SoundSpeed2(no_elements)
 elmass = Mass(no_elements)
 elvolume = Volume(no_elements)
+
+#set densities and energy for sod shock
+eldensity = Density(np.where(reg_numbers==1,1.0,0.125))
+elenergy = Energy(np.where(reg_numbers==1,1.0,0.125))
+elmass.update(eldensity,elvolume)
 
 #init vector quantites
 nodepos,el2nodemap = init_nodepos(reg_origins,node_spacing,reg_numbers)

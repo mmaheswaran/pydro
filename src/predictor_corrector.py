@@ -33,7 +33,9 @@ class PredictorCorrector:
         elvolume.update(ndpositions,mesh)
         
         #Update densitites
-        
-        
+        elmass = hydroprops['Mass']
+        eldensity = hydroprops['Density']
+        eldensity.update(elmass,elvolume)       
+        print(eldensity.get_data())
         
               
