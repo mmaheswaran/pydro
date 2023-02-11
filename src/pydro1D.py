@@ -27,42 +27,44 @@ def init_nodepos(reg_origins,node_spacing,reg_numbers):
     pos1 = pos2
 
   return nodpos,el2nodmap
-
-#1D try
-
-nodimensions = 1
-step = 0
-tim = 0.0
-initdt = 1e-4
-endtime = 20.0
-
-reg_lengths = [50.0, 50.0]
-reg_origins = [0.0,50.0]
-reg_meshsize = [50, 50]
-node_spacing = np.divide(np.array(reg_lengths),np.array(reg_meshsize))
-
-#initialise region numbers for each element
-reg_numbers = []
-no_regions = len(reg_lengths)
-no_elements = 0
-for reg in range(no_regions):
-  regsize = reg_meshsize[reg]
-  no_elements = no_elements + regsize
-  for e in range(regsize):
-    reg_numbers.append(reg)
-
-no_nodes = no_elements+1
+  
+def init_SodShock():
+    nodimensions = 1
+    initstep = 0
+    start_time = 0.0
+    initdt = 1e-4
+    end_time = 20.0
+    
+    reg_lengths = [50.0, 50.0]
+    reg_origins = [0.0,50.0]
+    reg_meshsize = [50, 50]
+    node_spacing = np.divide(np.array(reg_lengths),np.array(reg_meshsize))
+    
+    #initialise region numbers for each element
+    reg_numbers = []
+    no_regions = len(reg_lengths)
+    no_elements = 0
+    for reg in range(no_regions):
+        regsize = reg_meshsize[reg]
+        no_elements = no_elements + regsize
+        for e in range(regsize):
+            reg_numbers.append(reg)
+            
+    no_nodes = no_elements+1
+    
+    #set densities and energy for sod shock
+    eldensity = Density(np.where(reg_numbers==1,1.0,0.125))
+    elenergy = Energy(np.where(reg_numbers==1,1.0,0.125))
+    elmass.update(eldensity,elvolume)
+    
+    initSodprops = {}
+    
 
 #init scalar quantities
 elpressure = Pressure(no_elements)
 elccs2 = SoundSpeed2(no_elements)
 elmass = Mass(no_elements)
 elvolume = Volume(no_elements)
-
-#set densities and energy for sod shock
-eldensity = Density(np.where(reg_numbers==1,1.0,0.125))
-elenergy = Energy(np.where(reg_numbers==1,1.0,0.125))
-elmass.update(eldensity,elvolume)
 
 #init vector quantites
 nodepos,el2nodemap = init_nodepos(reg_origins,node_spacing,reg_numbers)
@@ -74,8 +76,6 @@ ndvelocity = Velocity(no_nodes)
 mesh = FEM1D(no_elements)
 mesh.get_connectivity(el2nodemap)
 
-#Main solver
-solver = PredictorCorrector(initdt,step,tim,endtime)
 hydroproperties = {mesh.__str__():mesh, \
                    elenergy.__str__():elenergy, \
                    eldensity.__str__():eldensity, \
@@ -85,6 +85,10 @@ hydroproperties = {mesh.__str__():mesh, \
                    elvolume.__str__():elvolume, \
                    ndpositions.__str__():ndpositions, \
                    ndvelocity.__str__():ndvelocity}
+
+
+#Main solver
+solver = PredictorCorrector(initdt,initstep,start_time,end_time)
 
 solver.solve(hydroproperties)
 
