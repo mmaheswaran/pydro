@@ -1,17 +1,19 @@
+from artificial_viscosity import ArtificialViscosity
+
 class PredictorCorrector:
 
-    def __init__(self, initdt, initstep, st, et):
+    def __init__(self, initdt, initstep, st, et,qcoeffs,boundary_conditions):
         self.dt = initdt
         self.step = initstep
         self.starttime = st
         self.endtime = et
-        
+        self.artifical_visc = ArtificialViscosity(qcoeffs,boundary_conditions)
+    
         
     def solve(self, hydroprops):
         # unpack hydroprops dictionary object
         elenergy = hydroprops['Energy']
         eldensity = hydroprops['Density']
-        elpressure = hydroprops['Pressure']
         elccs2 = hydroprops['SoundSpeedSquared']
         elmass = hydroprops['Mass']
         elvolume = hydroprops['Volume']
@@ -37,5 +39,11 @@ class PredictorCorrector:
         eldensity = hydroprops['Density']
         eldensity.update(elmass,elvolume)       
         print(eldensity.get_data())
+
+        #smear shock
+        elpressure = hydroprops['Pressure']
+        noelements = len(elpressure)
+        artifical_visc = self.artifical_visc.solve(hydroprops,noelements)
+        smearedpressure = elpressure.get_data() + artifical_visc
         
               
