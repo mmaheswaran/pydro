@@ -7,8 +7,8 @@ class ScalarProperty(ABC):
     def __init__(self,size):
         self.data = np.zeros(size)
         
-    def __init__(self,nparray):
-        self.data = nparray
+    def __init__(self,array_data):
+        self.data = np.array(array_data)
         
     def get(self,index):
         return self.data[index]

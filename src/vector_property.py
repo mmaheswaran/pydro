@@ -5,7 +5,9 @@ from abc import ABC, abstractmethod
 class VectorProperty(ABC):
     def __init__(self,size):
         self.data = np.zeros(size)
-        
+
+    def __init__(self,array_data):
+        self.data = np.array(array_data)
     
     def get_data(self):
         return self.data

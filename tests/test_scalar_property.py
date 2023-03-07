@@ -46,10 +46,5 @@ class TestScalarProperties(unittest.TestCase):
         #self.assertEqual(mass.get_data(),1.0)
         
         
-        
-        
-        
-        
-        
 if __name__=='__main__':
     unittest.main()
