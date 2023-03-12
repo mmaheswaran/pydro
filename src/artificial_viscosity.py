@@ -22,7 +22,7 @@ class ArtificialViscosity:
     def calculate_limiter(self,gradv_c):
         gradv_l = np.roll(gradv_c,1)
         gradv_r = np.roll(gradv_c,-1)
-        apply_boundary_conditions(gradv_l,gradv_r)
+        self.apply_boundary_conditions(gradv_l,gradv_r)
         
         l_ratio = np.divide(gradv_l, gradv_c, out=np.zeros_like(gradv_l), where=gradv_c!=0)
         r_ratio = np.divide(gradv_r, gradv_c, out=np.zeros_like(gradv_r),where=gradv_c!=0)
@@ -46,9 +46,9 @@ class ArtificialViscosity:
 
         ndveldata = ndvelocity.get_data()
         ndposdata = ndpositions.get_data()
-        gradv_c = np.grad(ndveldata,ndposdata)
+        gradv_c = np.gradient(ndveldata,ndposdata)
 
-        limiter = calculate_limiter(gradv_c)
+        limiter = self.calculate_limiter(gradv_c)
         limitersq = limiter*limiter
         gradv_csq = gradv_c*gradv_c
         rho = eldensity.get_data()

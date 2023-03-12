@@ -34,9 +34,9 @@ class Energy(ScalarProperty):
     
 class Density(ScalarProperty):
     
-  #  def update(self, mass, volume):
-  #      np.seterr(divide="raise")
-  #      self.data = mass.get_data()/volume.get_data()
+    def update(self, mass, volume):
+        np.seterr(divide="raise")
+        self.data = mass.get_data()/volume.get_data()
     
     def __str__(self):
         return 'Density'
@@ -48,8 +48,9 @@ class Pressure(ScalarProperty):
     
 class Mass(ScalarProperty):
     
- #   def update(self,density,volume):
- #       self.data = density.get_data()*volume.get_data()      
+    def update(self,density,volume):
+        self.data = density.get_data()*volume.get_data() 
+
     def __str__(self):
         return 'Mass'
 
@@ -61,14 +62,11 @@ class SoundSpeed2(ScalarProperty):
     
 class Volume(ScalarProperty):
     
-    def __init__(self,size):
-        pass
-    
     def __str__(self):
         return 'Volume'
     
-   # def update(self, ndpositions, mesh):
-   #     noelements = (self.data).size()
-   #     for e in range(noelements):
-   #         self.data[e] = mesh.get_volume(e,ndpositions)
+    def update(self, ndpositions, mesh):
+        noelements = (self.data).size()
+        for e in range(noelements):
+            self.data[e] = mesh.get_volume(e,ndpositions)
             
