@@ -7,9 +7,6 @@ class ScalarProperty(ABC):
     def __init__(self,size,value):
         self.data = np.ones(size)*value
         
-    def set__init__data(self,array_data):
-        self.data = np.array(array_data)
-        
     def get(self,index):
         return self.data[index]
     
@@ -18,6 +15,9 @@ class ScalarProperty(ABC):
         
     def get_data(self):
         return self.data
+    
+    def set_data(self,array_data):
+        self.data = np.array(array_data)
     
     #def datalen(self):
     #    return self.data.size

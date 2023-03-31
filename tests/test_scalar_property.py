@@ -9,7 +9,8 @@ class TestScalarProperties(unittest.TestCase):
     
     def setUp(self):
         self.mesh = FEM1D(1)
-        #self.ndpos = Position([0.0,1.0])
+        self.ndpos = Position(1,0.0)
+        self.ndpos.set_data([0.0,1.0])
         self.connectivity = np.array([[0,1]])
         self.mesh.get_connectivity(self.connectivity)
         
@@ -31,14 +32,25 @@ class TestScalarProperties(unittest.TestCase):
         volume = Volume(2,0.0)
         self.assertRaises(AssertionError,density.update,mass,volume)
         
-
-    # def test_volume_update(self):
-    #      vol = Volume(4)
-    #      print(vol.get_data())
-         #self.assertEqual(vol.datalen(), 1)
+    def test_pressure_update(self):
+        pressure = Pressure(3,0.0)
+        expected = [0.0,0.0,0.0]
+        np.testing.assert_allclose(pressure.get_data(),expected)
+    
+    def test_mass_update(self):
+        density = Density(2,1.0)
+        volume = Volume(2,2.0)
+        mass = Mass(2,0.0)
+        mass.update(density,volume)
+        expected = [2.0,2.0]
+        np.testing.assert_allclose(mass.get_data(),expected)
         
-    #     vol.update(self.ndpos,self.mesh)
-    #     self.assertEqual(vol.get_data(), [1.0])
+
+    def test_volume_update(self):
+        volume = Volume(2,1.0)
+        
+        volume.update(self.ndpos,self.mesh)
+       # np.testing.assert_allclos(vol.get_data(), [1.0])
         
     # def test_density_update(self):
     #     density = Density(1)
@@ -50,17 +62,6 @@ class TestScalarProperties(unittest.TestCase):
         
     #     #density.update(mass,vol)
     #     #self.assertEqual(density.get_data(), 1.0)       
-        
-    # def test_mass_update(self):
-    #     #density = Density(1)
-    #     #density.set(0,1.0) 
-    #     #vol = Volume(1)
-    #     #vol.set(0,1.0) 
-    #     mass = Mass(1)
-    #     print(mass.get_data())
-        
-    #     #mass.update(density,vol)
-    #     #self.assertEqual(mass.get_data(),1.0)
         
         
 if __name__=='__main__':
