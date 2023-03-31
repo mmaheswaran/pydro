@@ -3,10 +3,10 @@ from scalar_property import Mass, Pressure
 from abc import ABC, abstractmethod
 
 class VectorProperty(ABC):
-    def __init__(self,size):
-        self.data = np.zeros(size)
-
-    def __init__(self,array_data):
+    def __init__(self,size,value):
+        self.data = np.ones(size)*value
+        
+    def set__init__data(self,array_data):
         self.data = np.array(array_data)
     
     def get_data(self):
