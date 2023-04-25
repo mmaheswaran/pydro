@@ -61,16 +61,16 @@ def init_SodShock():
     
 
 #init scalar quantities
-elpressure = Pressure(no_elements)
-elccs2 = SoundSpeed2(no_elements)
-elmass = Mass(no_elements)
-elvolume = Volume(no_elements)
+elpressure = Pressure(no_elements,0.0)
+elccs2 = SoundSpeed2(no_elements,0.0)
+elmass = Mass(no_elements,0.0)
+elvolume = Volume(no_elements,0.0)
 
 #init vector quantites
 nodepos,el2nodemap = init_nodepos(reg_origins,node_spacing,reg_numbers)
 assert len(nodepos) == no_nodes, "number node positions not equal to {no_nodes}, got: {len(nodepos)}"
-ndpositions = Position(nodepos)
-ndvelocity = Velocity(no_nodes)
+ndpositions = Position(nodepos,0.0)
+ndvelocity = Velocity(no_nodes,0.0)
 
 #setup mesh
 mesh = FEM1D(no_elements)

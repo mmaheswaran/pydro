@@ -4,11 +4,8 @@ from _operator import index
 
 class ScalarProperty(ABC):
     
-    def __init__(self,size):
-        self.data = np.zeros(size)
-        
-    def __init__(self,array_data):
-        self.data = np.array(array_data)
+    def __init__(self,size,value):
+        self.data = np.ones(size)*value
         
     def get(self,index):
         return self.data[index]
@@ -19,6 +16,9 @@ class ScalarProperty(ABC):
     def get_data(self):
         return self.data
     
+    def set_data(self,array_data):
+        self.data = np.array(array_data)
+    
     #def datalen(self):
     #    return self.data.size
         
@@ -28,7 +28,7 @@ class ScalarProperty(ABC):
     
     
 class Energy(ScalarProperty):
-    
+
     def __str__(self):
         return 'Energy'
     
@@ -36,6 +36,7 @@ class Density(ScalarProperty):
     
     def update(self, mass, volume):
         np.seterr(divide="raise")
+        assert (volume.get_data()!=0).all(), 'Division by zero'
         self.data = mass.get_data()/volume.get_data()
     
     def __str__(self):
@@ -61,7 +62,7 @@ class SoundSpeed2(ScalarProperty):
         return 'SoundSpeedSquared'
     
 class Volume(ScalarProperty):
-    
+
     def __str__(self):
         return 'Volume'
     
