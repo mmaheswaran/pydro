@@ -1,4 +1,5 @@
 import unittest
+import numpy as np
 
 from scalar_property import *
 from vector_property import *
