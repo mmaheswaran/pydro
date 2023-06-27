@@ -35,7 +35,7 @@ class ArtificialViscosity:
     #Specify left and right boundary conditions:
     #  1 = rigid boundary
     #  2 = reflective boundary
-    def solve(self,hydroprops,nel):
+    def solve(self,hydroprops):
         ndpositions = hydroprops['Position']
         ndvelocity = hydroprops['Velocity']
         elccs2 = hydroprops['SoundSpeedSquared']

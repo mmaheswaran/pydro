@@ -4,6 +4,10 @@ from _operator import index
 
 class Energy(PhysicalProperty):
 
+    #find divergence of velocity field
+
+    #energy calcualated using rho*dE/dt = -pdv
+
     def __str__(self):
         return 'Energy'
     

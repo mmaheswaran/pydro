@@ -34,7 +34,7 @@ class PredictorCorrector:
         mesh = hydroprops['Mesh']
         elvolume.update(ndpositions,mesh)
         
-        #Update densitites
+        #update densitites
         elmass = hydroprops['Mass']
         eldensity = hydroprops['Density']
         eldensity.update(elmass,elvolume)       
@@ -42,8 +42,16 @@ class PredictorCorrector:
 
         #smear shock
         elpressure = hydroprops['Pressure']
-        noelements = len(elpressure)
-        q = self.artifical_visc.solve(hydroprops,noelements)
+        elenergy = hydroprops['Energy']
+
+        q = self.artifical_visc.solve(hydroprops)
         smearedpressure = elpressure.get_data() + q
+
+        #update energy
+        elenergy.update()
+
+        #update pressure
+
+        #update sound speed
         
               

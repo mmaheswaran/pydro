@@ -28,5 +28,8 @@ class FEM1D(Mesh):
         dl = abs(nodpos[node2]-nodpos[node1])
         
         return dl
+    
+    def calc_divergence(field):
+        
         
     
