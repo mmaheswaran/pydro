@@ -1,7 +1,7 @@
 import numpy as np
 from predictor_corrector import PredictorCorrector
-from vector_property import *
-from scalar_property import *
+from vector_properties import *
+from scalar_properties import *
 from mesh import FEM1D
 
 #Assume equal spacing and calculate connectivity

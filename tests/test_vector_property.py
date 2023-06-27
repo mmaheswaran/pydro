@@ -1,8 +1,8 @@
 import unittest
 import numpy as np
 
-from scalar_property import *
-from vector_property import *
+from scalar_properties import *
+from vector_properties import *
 from mesh import FEM1D
 
 

@@ -1,8 +1,8 @@
 import unittest
 import numpy as np
 
-from scalar_property import *
-from vector_property import *
+from scalar_properties import *
+from vector_properties import *
 from mesh import FEM1D
 
 class TestScalarProperties(unittest.TestCase):
@@ -10,7 +10,8 @@ class TestScalarProperties(unittest.TestCase):
     def setUp(self):
         self.mesh = FEM1D(1)
         self.ndpos = Position(1,0.0)
-        self.ndpos.set_data([0.0,1.0])
+        t = [0.0,1.0]
+        self.ndpos.set_data(t)
         self.connectivity = np.array([[0,1]])
         self.mesh.get_connectivity(self.connectivity)
         
@@ -47,21 +48,12 @@ class TestScalarProperties(unittest.TestCase):
         
 
     def test_volume_update(self):
-        volume = Volume(2,1.0)
+        volume = Volume(1,1.0)
         
         volume.update(self.ndpos,self.mesh)
-       # np.testing.assert_allclos(vol.get_data(), [1.0])
-        
-    # def test_density_update(self):
-    #     density = Density(1)
-    #     print(density.get_data())
-    #     #mass = Mass(1)
-    #     #mass.set(0,1.0)
-    #     #vol = Volume(1)
-    #     #vol.set(0,1.0) 
-        
-    #     #density.update(mass,vol)
-    #     #self.assertEqual(density.get_data(), 1.0)       
+        expected = [1.0]
+        np.testing.assert_allclos(volume.get_data(), expected)
+             
         
         
 if __name__=='__main__':

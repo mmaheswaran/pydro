@@ -1,28 +1,8 @@
 import numpy as np
-from scalar_property import Mass, Pressure
-from abc import ABC, abstractmethod
+from scalar_properties import Mass, Pressure
+from physical_property import PhysicalProperty
 
-class VectorProperty(ABC):
-    def __init__(self,size,value):
-        self.data = np.ones(size)*value
-        
-    def set_data(self,array_data):
-        self.data = np.array(array_data)
-    
-    def get_data(self):
-        return self.data
-    
-    @abstractmethod
-    def __str__(self):
-        pass
-    
-    @abstractmethod
-    def update(self):
-        pass
-    
-    
-
-class Position(VectorProperty):
+class Position(PhysicalProperty):
     
     def __init__(self,list):
         self.data = np.array(list)
@@ -34,7 +14,7 @@ class Position(VectorProperty):
         self.data = self.data + velocity.get_data()*dt
         
         
-class Velocity(VectorProperty):
+class Velocity(PhysicalProperty):
     
     def __str__(self):
         return 'Velocity'
@@ -42,7 +22,7 @@ class Velocity(VectorProperty):
     def update(self,acceleration,dt):
         self.data = self.data + acceleration.get_data()*dt
         
-class Force(VectorProperty):
+class Force(PhysicalProperty):
     
     def __str__(self):
         return 'Force'
@@ -52,7 +32,7 @@ class Force(VectorProperty):
         self.data = pressure.get_data()*area+el2nodemap
     
         
-class Acceleration(VectorProperty):
+class Acceleration(PhysicalProperty):
     
     def __str__(self):
         return 'Acceleration'
