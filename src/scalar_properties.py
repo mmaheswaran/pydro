@@ -18,7 +18,12 @@ class Density(PhysicalProperty):
         return 'Density'
     
 class Pressure(PhysicalProperty):
-    
+
+    def update(self,density,energy):
+
+        gruneisen_gamma = 1.4 #ideal gas
+        self.data = density.get_data() * energy.get_data()*(gruneisen_gamma-1)
+
     def __str__(self):
         return 'Pressure'
     
