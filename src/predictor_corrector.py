@@ -43,7 +43,7 @@ class PredictorCorrector:
         #smear shock
         elpressure = hydroprops['Pressure']
         noelements = len(elpressure)
-        artifical_visc = self.artifical_visc.solve(hydroprops,noelements)
-        smearedpressure = elpressure.get_data() + artifical_visc
+        q = self.artifical_visc.solve(hydroprops,noelements)
+        smearedpressure = elpressure.get_data() + q
         
               
